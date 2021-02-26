@@ -15,7 +15,13 @@ plt.show() #display image on screen
 
 plt.hist(img.ravel(),256,[0,256]) #plot histogram
 plt.title("Histogram for the Original Brain Image")
-plt.xlabel('Intensity [0-256]')
+plt.xlabel('Intensity [0-256] | Bins = 256')
+plt.ylabel('No. of Pixels')
+plt.show() #display histogram
+
+plt.hist(img.ravel(),10,[0,256]) #plot histogram
+plt.title("Histogram for the Original Brain Image")
+plt.xlabel('Intensity [0-256] | Bins = 10')
 plt.ylabel('No. of Pixels')
 plt.show() #display histogram
 
