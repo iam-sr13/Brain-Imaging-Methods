@@ -1,7 +1,12 @@
-#Brain Imaging Methods | Assignment - II | Basic Image processing
-#Author: Shriraj  Sawant
-#Roll No: 19350006
-#PhD Scholar @BRaINLab IITGN
+"""
+Brain Imaging Methods | Assignment - II | Basic Image processing and Gaussian Smoothening
+
+@Author: Shriraj  Sawant
+@Roll_No: 19350006
+@PhD_Scholar 
+@BRaINLab_IITGN
+
+"""
 
 #Import Statements
 import numpy as np
@@ -10,7 +15,7 @@ import matplotlib.pyplot as plt
 
 img = plt.imread("Brain_og.jpg") #Read image
 print("Shape of the image is: ")
-print(img.shape)
+print(img.shape) #show image dimensions
 plt.imshow(img, cmap='Greys_r') #start plotting image
 plt.title("Original Brain Image with shape {}x{}".format(img.shape[0], img.shape[1])) #add title and image dimensions
 plt.show() #display image on screen
