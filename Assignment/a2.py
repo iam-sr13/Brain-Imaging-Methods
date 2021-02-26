@@ -5,7 +5,7 @@
 
 #Import Statements
 import numpy as np
-import scipy as sp
+from scipy import ndimage
 import matplotlib.pyplot as plt
 
 img = plt.imread("Brain_og.jpg") #Read image
@@ -31,7 +31,7 @@ plt.show() #display histogram
 sigmas=[5, 10, 20, 30, 40, 50] #levels of gaussian smoothening
 
 for sigma in sigmas:
-  smooth_img = sp.ndimage.gaussian_filter(img, sigma)
+  smooth_img = ndimage.gaussian_filter(img, sigma) #applied gaussian smoothening with corresponding sigma
   
   plt.imshow(smooth_img, cmap='Greys_r') #start plotting image
   plt.title("Smoothened Brain Image with shape {}x{} & sigma = {}".format(smooth_img.shape[0], smooth_img.shape[1], sigma)) #add title and image dimensions
