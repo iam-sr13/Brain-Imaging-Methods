@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 img = plt.imread("Brain_og.jpg") #Read image
 plt.imshow(img) #start plotting image
-plt.title("Original Brain Image with shape {}x{}".format(img.shape)) #add title and image dimensions
+plt.title("Original Brain Image with shape {}x{}".format(img.shape[0], img.shape[1])) #add title and image dimensions
 plt.show() #display image on screen
 
 
