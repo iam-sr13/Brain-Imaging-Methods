@@ -19,6 +19,16 @@ def parse_instructions(input, START, END):
 
         return text
 
+def read_instructions_file(instructionsfile, START, END):
+    """Function for reading instructions from the file"""
+    with codecs.open(instructionsfile, 'r', encoding='utf-8') as instructions:
+        input_data = instructions.read()
+        text = parse_instructions(input_data, START, END)
 
+    return text
 
+def create_dir(directory):
+    """Function for creating folders"""
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
