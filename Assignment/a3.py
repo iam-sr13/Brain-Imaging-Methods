@@ -94,6 +94,91 @@ class Stroop_test:
             core.quit()
             return 'Cancelled'
         
+    def create_trials(self, trial_file, randomization='random'):
+        #Generate random stroop test trials from samples stored in file
+        data_types = ['Response', 'Accuracy', 'RT', 'Sub_id', 'Sex']
+        with open(trial_file, 'r') as stimfile:
+            _stims = csv.DictReader(stimfile)
+            trials = data.TrialHandler(list(_stims), 1,
+                                       method="random")
+
+        [trials.data.addDataType(data_type) for data_type in data_types]
+
+        return trials
+
+    def running_experiment(self, trials, testtype):
+        #execute experiment 
+        #two modes: Practice Vs Test
+        #Practice mode records no behavioral data whereas Test mode considers Response Time and other data
+        
+        _trials = trials
+        testtype = testtype
+        timer = core.Clock()
+        
+        #Create text stimuli
+        stimuli = [visual.TextStim(win=window, ori=0, name='', text=None, font=u'Arial', pos=[0.0, 0.0], color='Black', colorSpace=u'rgb') for _ in range(4)]
+
+        for trial in _trials:
+            # Stimuli for Fixation cross
+            fixation = stimuli[3]
+            fixation.pos = self.stimuli_positions[2]
+            fixation.setColor('Black')
+            fixation.setText('+')
+            
+            #draw fixation cross
+            fixation.draw()
+            window.flip()
+            core.wait(.6)
+            timer.reset()
+
+            # Target word
+            target = stimuli[0]
+            target.pos = self.stimuli_positions[2]
+            target.setColor(trial['colour'])
+            target.setText(trial['stimulus'])            
+            target.draw()
+            
+            # Choice 1
+            choice1 = stimuli[1]
+            choice1.pos = self.stimuli_positions[0]
+            choice1.setColor('Black')
+            choice1.setText(trial['alt1']) 
+            choice1.draw()
+            
+            # Choice 2
+            choice2 = stimuli[2]
+            choice2.pos = self.stimuli_positions[1]
+            choice2.setColor('Black')
+            choice2.setText(trial['alt2']) 
+            choice2.draw()
+            
+            #Wait for user response
+            window.flip()
+            keys = event.waitKeys(keyList=['x', 'm'])
+            resp_time = timer.getTime()
+            if testtype == 'practice':
+                if keys[0] != trial['correctresponse']:
+                    instruction_stimuli['incorrect'].draw()
+                else:
+                    instruction_stimuli['right'].draw()
+
+                window.flip()
+                core.wait(2)
+
+            if testtype == 'test':
+                if keys[0] == trial['correctresponse']:
+                    trial['Accuracy'] = 1
+                else:
+                    trial['Accuracy'] = 0
+
+                trial['RT'] = resp_time
+                trial['Response'] = keys[0]
+                trial['Sub_id'] = settings['Subid']
+                trial['Sex'] = settings['Sex']
+                write_csv(settings[u'DataFile'], trial)
+
+            event.clearEvents()
+        
 
 
 
