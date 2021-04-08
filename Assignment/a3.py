@@ -1,5 +1,7 @@
-from psychopy import visual, core, logging, event  # import some libraries from PsychoPy, include logging for creating logfiles
-from datetime import datetime # import datetime library for timestamp
-from psychopy.hardware import keyboard # import keyboard library
+#Import core psychopy libraries for running experiment
+
+from psychopy import data, gui, visual, core, logging, event  
+from datetime import datetime 
+from psychopy.hardware import keyboard 
 
 
