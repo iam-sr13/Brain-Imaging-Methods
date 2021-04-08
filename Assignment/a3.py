@@ -178,6 +178,71 @@ class Stroop_test:
 
             event.clearEvents()
         
+############################################################################
+            
+def create_instructions_dict(instr):
+    start_n_end = [w for w in instr.split() if w.endswith('START') or w.endswith('END')]
+    keys = {}
+
+    for word in start_n_end:
+        key = re.split("[END, START]", word)[0]
+
+        if key not in keys.keys():
+            keys[key] = []
+
+        if word.startswith(key):
+            keys[key].append(word)
+    return keys
+
+
+def create_instructions(input, START, END):
+    instruction_text = parse_instructions(input, START, END)
+    print(instruction_text)
+    text_stimuli = visual.TextStim(window, text=instruction_text, wrapWidth=1.2,
+                                   alignHoriz='center', color="Black",
+                                   alignVert='center', height=0.06)
+
+    return text_stimuli
+
+
+def display_instructions(start_instruction=''):
+    # Display instructions
+
+    if start_instruction == 'Practice':
+        instruction_stimuli['instructions'].pos = (0.0, 0.5)
+        instruction_stimuli['instructions'].draw()
+
+        positions = [[-.2, 0], [.2, 0], [0, 0]]
+        examples = [visual.TextStim(win=window, ori=0, name='', text=None, font=u'Arial', pos=[0.0, 0.0], color='Black', colorSpace=u'rgb') for pos in positions]
+        example_words = ['green', 'blue', 'green']
+        
+        for i, pos in enumerate(positions):
+            examples[i].pos = pos
+
+            if i == 0:
+                examples[0].setText(example_words[i])
+
+            elif i == 1:
+                examples[1].setText(example_words[i])
+
+            elif i == 2:
+                examples[2].setColor('Green')
+                examples[2].setText(example_words[i])
+
+        [example.draw() for example in examples]
+
+        instruction_stimuli['practice'].pos = (0.0, -0.5)
+        instruction_stimuli['practice'].draw()
+
+    elif start_instruction == 'Test':
+        instruction_stimuli['test'].draw()
+
+    elif start_instruction == 'End':
+        instruction_stimuli['done'].draw()
+
+    window.flip()
+    event.waitKeys(keyList=['space'])
+    event.clearEvents()
 
 
 
