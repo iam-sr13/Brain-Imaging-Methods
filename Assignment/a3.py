@@ -10,9 +10,16 @@ Brain Imaging Methods | Assignment - III | Behavioral Study | Psychopy Stroop Te
 ###############################################################################
 #Import core psychopy libraries for running experiment
 
-from psychopy import data, gui, visual, core, logging, event  
+from psychopy import monitors, data, gui, visual, core, logging, event  
 from datetime import datetime 
 from psychopy.hardware import keyboard 
+
+# Define a monitor
+my_monitor = monitors.Monitor(name='my_tv')
+my_monitor.setSizePix((1024, 768))
+my_monitor.setWidth(30)
+my_monitor.setDistance(30)
+my_monitor.saveMon()
 
 ###############################################################################
 #Import file handling libraries
@@ -57,3 +64,6 @@ def write_csv(fileName, thisTrial):
             csv.writer(f, delimiter=';').writerow(thisTrial.values())
             
 #######################################################################
+
+
+
