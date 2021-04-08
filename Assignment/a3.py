@@ -1,3 +1,13 @@
+"""
+Brain Imaging Methods | Assignment - III | Behavioral Study | Psychopy Stroop Test
+
+@Author: Shriraj  Sawant
+@Roll_No: 19350006
+@PhD_Scholar 
+@BRaINLab_IITGN
+
+"""
+###############################################################################
 #Import core psychopy libraries for running experiment
 
 from psychopy import data, gui, visual, core, logging, event  
