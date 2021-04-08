@@ -243,6 +243,38 @@ def display_instructions(start_instruction=''):
     window.flip()
     event.waitKeys(keyList=['space'])
     event.clearEvents()
+    
+    
+if __name__ == "__main__":
+    #Initialise Experiment
+    experiment = Stroop_test(win_color="White")
+    settings = experiment.settings() #extract settings
+    language = settings['Language']
+    
+    #read and display instructions
+    instructions = read_instructions_file("instructions.dat", language, language + "End") 
+    instructions_dict = create_instructions_dict(instructions)
+    instruction_stimuli = {}
+    window = experiment.create_window(color=(0, 0, 0))
+    for instruction, (START, END) in instructions_dict.items():
+        instruction_stimuli[instruction] = create_instructions(instructions, START, END)
+        
+    #Make mouse invisible to prevent distractions
+    event.Mouse(visible=False)
+    
+    # Practice Trials
+    display_instructions(start_instruction='Practice')
+    practice = experiment.create_trials('stroop_samples.csv')
+    experiment.running_experiment(practice, testtype='practice')
+    
+    # Test trials
+    display_instructions(start_instruction='Test')
+    trials = experiment.create_trials('stroop_test.csv')
+    experiment.running_experiment(trials, testtype='test')
+
+    # End experiment but first we display some instructions
+    display_instructions(start_instruction='End')
+    window.close()    
 
 
 
