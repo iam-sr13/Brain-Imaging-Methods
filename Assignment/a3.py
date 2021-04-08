@@ -65,5 +65,35 @@ def write_csv(fileName, thisTrial):
             
 #######################################################################
 
+#Create class for setting up and executing stroop experiment, using object oriented programming
+class Stroop_test:
+    def __init__(self, win_color): #class constructor, basically initialise class variables
+        self.stimuli_positions = [[-.2, 0], [.2, 0], [0, 0]]
+        self.win_color = win_color
+
+    def create_window(self, color=(1, 1, 1)): #create window for displaying experiment
+        
+        color = self.win_color
+        win = visual.Window(monitor="testMonitor",
+                            color=color, fullscr=True)
+        return win
+
+    def settings(self): #Set default experiment variables
+        experiment_info = {'Subid': '', 'Age': '', 'Experiment Version': 0.1,
+                           'Sex': ['Male', 'Female', 'Other'],
+                           'Language': ['English'], u'date':
+                               data.getDateStr(format="%Y-%m-%d_%H:%M")}
+
+        info_dialog = gui.DlgFromDict(title='Stroop task', dictionary=experiment_info,
+                                      fixed=['Experiment Version'])
+        experiment_info[u'DataFile'] = u'Data' + os.path.sep + u'stroop.csv'
+
+        if info_dialog.OK:
+            return experiment_info
+        else:
+            core.quit()
+            return 'Cancelled'
+        
+
 
 
