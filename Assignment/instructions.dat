@@ -1,9 +1,9 @@
 
 English
 instructionsSTART
-Your task is to as accurately and quickly as possible to determine the color of a presented word.
+Primary task is to swiftly and precisely determine the color of the presented word.
 You get two options, one on each side of the colored word.
-Use the X button if the right option is the left, and the M-key if right option is to the right.
+Press X if your choice is on the left, else Press M if you think the choice on the right is the correct answer.
 
 
 
@@ -18,7 +18,7 @@ testSTART
 Good work!
 
 
-If you have any questions, please ask experimenter leader now.
+If you have any questions, please ask experiment leader now.
 
 
 Try to answer as quickly and accurately as possible.
@@ -32,7 +32,7 @@ doneSTART
 The experiment is done,
 
 
-Please notify the experimental leader
+Please notify the experiment leader.
 
 
 Press space to end the experiment
